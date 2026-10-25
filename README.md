@@ -212,6 +212,9 @@ The `instance/` directory is ignored by Git and contains local runtime data, inc
 | ![Custom local URL](screenshots/10-custom-local-url.png.png) | Optional local hostname via Caddy |
 | ![Docker health check](screenshots/11-docker-health-check.png.png) | Health endpoint response from Docker |
 | ![Jenkins success](screenshots/12-jenkins-pipeline-success.png.png) | Successful Jenkins pipeline run |
+| ![Jenkins success](screenshots/13-Docker_Evidence.png.png) | Docker Evidence |
+| ![Jenkins success](screenshots/14-Commits_Evidence.png.png) | Commits Evidence|
+
 ```
 
 ## Prerequisites
