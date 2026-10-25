@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+{% block title %}Complaints | CampusCare{% endblock %}
+{% block page_title %}Complaints{% endblock %}
+{% block content %}
+<div class="mb-4">
+  <h1 class="h3 mb-1">All complaints</h1>
+  <p class="text-muted mb-0">Filter and review submitted complaints.</p>
+</div>
+
+<form method="get" class="card-soft mb-3">
+  <div class="row g-2 align-items-end">
+    <div class="col-md-4">
+      <label class="form-label" for="status">Status</label>
+      <select class="form-select" id="status" name="status">
+        <option value="">All statuses</option>
+        {% for s in statuses %}
+        <option value="{{ s }}" {% if s == status_filter %}selected{% endif %}>{{ s }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div class="col-md-4">
+      <label class="form-label" for="priority">Priority</label>
+      <select class="form-select" id="priority" name="priority">
+        <option value="">All priorities</option>
+        {% for p in priorities %}
+        <option value="{{ p }}" {% if p == priority_filter %}selected{% endif %}>{{ p }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div class="col-md-4 d-flex gap-2">
+      <button type="submit" class="btn btn-teal">Apply filters</button>
+      <a class="btn btn-outline-secondary" href="{{ url_for('complaints') }}">Reset</a>
+    </div>
+  </div>
+</form>
+
+<div class="card-soft">
+  {% if complaints %}
+  <div class="table-responsive">
+    <table class="table align-middle mb-0">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Title / Description</th>
+          <th>Category</th>
+          <th>Priority</th>
+          <th>Status</th>
+          <th>Submitted</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for c in complaints %}
+        <tr>
+          <td><code>{{ c.complaint_id }}</code></td>
+          <td>
+            <div class="fw-semibold">{{ c.title }}</div>
+            <div class="text-muted small">{{ c.description }}</div>
+          </td>
+          <td>{{ c.category }}</td>
+          <td><span class="badge badge-priority-{{ c.priority|lower }}">{{ c.priority }}</span></td>
+          <td><span class="badge badge-{{ 'pending' if c.status=='Pending' else ('progress' if c.status=='In Progress' else 'resolved') }}">{{ c.status }}</span></td>
+          <td>{{ c.created_at }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  {% else %}
+  <p class="text-muted mb-0">No complaints match the selected filters.</p>
+  {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+{% block title %}Dashboard | CampusCare{% endblock %}
+{% block page_title %}Dashboard{% endblock %}
+{% block content %}
+<div class="mb-4">
+  <h1 class="h3 mb-1">Campus overview</h1>
+  <p class="text-muted mb-0">Track complaints and resolution progress in real time.</p>
+</div>
+
+<div class="row g-3 mb-4">
+  <div class="col-sm-6 col-xl-3">
+    <div class="card-soft stat-card">
+      <div class="stat-label">Total Complaints</div>
+      <div class="stat-value">{{ counts.total }}</div>
+      <div class="stat-accent"></div>
+    </div>
+  </div>
+  <div class="col-sm-6 col-xl-3">
+    <div class="card-soft stat-card">
+      <div class="stat-label">Pending</div>
+      <div class="stat-value">{{ counts.pending }}</div>
+      <div class="stat-accent" style="background:#f59e0b"></div>
+    </div>
+  </div>
+  <div class="col-sm-6 col-xl-3">
+    <div class="card-soft stat-card">
+      <div class="stat-label">In Progress</div>
+      <div class="stat-value">{{ counts.in_progress }}</div>
+      <div class="stat-accent" style="background:#3b82f6"></div>
+    </div>
+  </div>
+  <div class="col-sm-6 col-xl-3">
+    <div class="card-soft stat-card">
+      <div class="stat-label">Resolved</div>
+      <div class="stat-value">{{ counts.resolved }}</div>
+      <div class="stat-accent" style="background:#22c55e"></div>
+    </div>
+  </div>
+</div>
+
+<div class="card-soft">
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h2 class="h5 mb-0">Recent complaints</h2>
+    <a class="btn btn-sm btn-teal" href="{{ url_for('new_complaint') }}">New Complaint</a>
+  </div>
+  {% if recent %}
+  <div class="table-responsive">
+    <table class="table align-middle mb-0">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Title</th>
+          <th>Category</th>
+          <th>Priority</th>
+          <th>Status</th>
+          <th>Submitted</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for c in recent %}
+        <tr>
+          <td><code>{{ c.complaint_id }}</code></td>
+          <td>{{ c.title }}</td>
+          <td>{{ c.category }}</td>
+          <td><span class="badge badge-priority-{{ c.priority|lower }}">{{ c.priority }}</span></td>
+          <td><span class="badge badge-{{ 'pending' if c.status=='Pending' else ('progress' if c.status=='In Progress' else 'resolved') }}">{{ c.status }}</span></td>
+          <td>{{ c.created_at }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  {% else %}
+  <p class="text-muted mb-0">No complaints yet. Submit your first complaint.</p>
+  {% endif %}
+</div>
+{% endblock %}
