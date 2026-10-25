@@ -442,8 +442,5 @@ Contributions are welcome. This repository does not currently include a formal `
 4. Keep changes focused and documented.
 5. Open a pull request against `main`.
 
-## License
 
-No license file is currently included in this repository. Add a `LICENSE` file before distributing or reusing the code.
-```
 
