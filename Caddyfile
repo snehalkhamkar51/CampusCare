@@ -1,0 +1,4 @@
+
+http://sneha51.local {
+    reverse_proxy host.docker.internal:5000
+}
