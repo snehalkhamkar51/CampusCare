@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block title %}Register | CampusCare{% endblock %}
+{% block page_title %}Student Registration{% endblock %}
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-md-7 col-lg-6">
+    <div class="card-soft">
+      <h1 class="h4 mb-3">Create a student account</h1>
+      {% if errors %}
+      <div class="alert alert-danger" role="alert">
+        <ul class="mb-0">
+          {% for e in errors %}<li>{{ e }}</li>{% endfor %}
+        </ul>
+      </div>
+      {% endif %}
+      <form method="post" novalidate>
+        <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+        <div class="mb-3">
+          <label class="form-label" for="username">Username</label>
+          <input class="form-control" id="username" name="username" type="text" value="{{ form.username }}" required>
+        </div>
+        <div class="mb-3">
+          <label class="form-label" for="email">Email</label>
+          <input class="form-control" id="email" name="email" type="email" value="{{ form.email }}" required>
+        </div>
+        <div class="mb-3">
+          <label class="form-label" for="password">Password</label>
+          <input class="form-control" id="password" name="password" type="password" required>
+          <div class="form-text">At least 8 characters.</div>
+        </div>
+        <div class="mb-3">
+          <label class="form-label" for="confirm_password">Confirm Password</label>
+          <input class="form-control" id="confirm_password" name="confirm_password" type="password" required>
+        </div>
+        <button type="submit" class="btn btn-teal w-100">Register</button>
+      </form>
+      <p class="text-muted small mt-3 mb-0">Already registered? <a href="{{ url_for('login') }}">Log in</a>.</p>
+    </div>
+  </div>
+</div>
+{% endblock %}

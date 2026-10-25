@@ -16,6 +16,7 @@
 {% endif %}
 
 <form method="post" class="card-soft" novalidate>
+  <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
   <div class="mb-3">
     <label class="form-label" for="category">Category</label>
     <select class="form-select" id="category" name="category" required>

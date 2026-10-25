@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block title %}Error {{ code }} | CampusCare{% endblock %}
+{% block page_title %}Error{% endblock %}
+{% block content %}
+<div class="card-soft text-center">
+  <h1 class="display-6">{{ code }}</h1>
+  <p class="text-muted">{{ message }}</p>
+  <a class="btn btn-teal" href="{{ url_for('dashboard') if current_user else url_for('login') }}">Go back</a>
+</div>
+{% endblock %}

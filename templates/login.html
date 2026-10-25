@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}Login | CampusCare{% endblock %}
+{% block page_title %}Login{% endblock %}
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-md-6 col-lg-5">
+    <div class="card-soft">
+      <h1 class="h4 mb-3">Sign in</h1>
+      <form method="post" novalidate>
+        <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+        <input type="hidden" name="next" value="{{ request.args.get('next','') }}">
+        <div class="mb-3">
+          <label class="form-label" for="username">Username</label>
+          <input class="form-control" id="username" name="username" type="text" value="{{ form.username }}" required autofocus>
+        </div>
+        <div class="mb-3">
+          <label class="form-label" for="password">Password</label>
+          <input class="form-control" id="password" name="password" type="password" required>
+        </div>
+        <button type="submit" class="btn btn-teal w-100">Login</button>
+      </form>
+      <p class="text-muted small mt-3 mb-0">No account? <a href="{{ url_for('register') }}">Register as a student</a>.</p>
+    </div>
+  </div>
+</div>
+{% endblock %}

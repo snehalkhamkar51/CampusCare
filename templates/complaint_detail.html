@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block title %}Complaint {{ complaint.complaint_id }} | CampusCare{% endblock %}
+{% block page_title %}Complaint Detail{% endblock %}
+{% block content %}
+<div class="card-soft">
+  <div class="d-flex justify-content-between align-items-start mb-3">
+    <div>
+      <h1 class="h4 mb-1">{{ complaint.title }}</h1>
+      <code>{{ complaint.complaint_id }}</code>
+    </div>
+    <span class="badge badge-{{ 'pending' if complaint.status=='Pending' else ('progress' if complaint.status=='In Progress' else 'resolved') }}">{{ complaint.status }}</span>
+  </div>
+
+  <dl class="row mb-0">
+    <dt class="col-sm-3">Category</dt>
+    <dd class="col-sm-9">{{ complaint.category }}</dd>
+    <dt class="col-sm-3">Priority</dt>
+    <dd class="col-sm-9"><span class="badge badge-priority-{{ complaint.priority|lower }}">{{ complaint.priority }}</span></dd>
+    <dt class="col-sm-3">Description</dt>
+    <dd class="col-sm-9">{{ complaint.description }}</dd>
+    <dt class="col-sm-3">Submitted</dt>
+    <dd class="col-sm-9">{{ complaint.created_at }}</dd>
+    <dt class="col-sm-3">Last updated</dt>
+    <dd class="col-sm-9">{{ complaint.updated_at or complaint.created_at }}</dd>
+  </dl>
+</div>
+
+{% if current_user.role == 'admin' %}
+<div class="card-soft mt-3">
+  <h2 class="h6">Update status</h2>
+  <form method="post" action="{{ url_for('update_status', complaint_pk=complaint.id) }}" class="d-flex gap-2">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+    <select class="form-select" name="status" style="max-width:220px">
+      {% for s in statuses %}
+      <option value="{{ s }}" {% if s == complaint.status %}selected{% endif %}>{{ s }}</option>
+      {% endfor %}
+    </select>
+    <button type="submit" class="btn btn-teal">Update</button>
+  </form>
+</div>
+{% endif %}
+{% endblock %}
