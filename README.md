@@ -19,9 +19,30 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/snehalkhamkar51/CampusCare">View Repository</a> ·
-  <a href="https://github.com/snehalkhamkar51/CampusCare/tree/main">Browse Source Code</a> ·
-  <a href="https://github.com/snehalkhamkar51/CampusCare/issues">View Issues</a>
+  
+  <a href="https://github.com/snehalkhamkar51/CampusCare">
+    View Repository
+  </a> ·
+  <a href="https://github.com/snehalkhamkar51/CampusCare/tree/main">
+    Browse Source Code
+  </a> ·
+  <a href="https://github.com/snehalkhamkar51/CampusCare/issues">
+    View Issues
+  </a>
+</p>
+
+<p align="center">
+  <strong>Live Demo:</strong>
+  <a href="https://campuscare-d9g9.onrender.com">
+    https://campuscare-d9g9.onrender.com
+  </a>
+</p>
+
+<p align="center">
+  <em>
+    Hosted on Render. The free instance may take 50 seconds
+    or more to wake after inactivity.
+  </em>
 </p>
 
 <p align="center">
